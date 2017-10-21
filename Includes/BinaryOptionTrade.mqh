@@ -171,12 +171,12 @@ void log_a_loss()
 //+------------------------------------------------------------------+
 void WriteData(string mode)
   {
-     if (StringLen(FilenameLogTrades) == 0)
+     if (StringLen(FilenameLogTrades()) == 0)
        return ; // User not defined a filename to log file
    ResetLastError();
-   int file_handle=FileOpen("Data//"+FilenameLogTrades, FILE_READ|FILE_WRITE|FILE_CSV);
+   int file_handle=FileOpen("Data//"+FilenameLogTrades(), FILE_READ|FILE_WRITE|FILE_CSV);
    if (file_handle==INVALID_HANDLE)
-     return ; // Erro abrindo arquivo Data//FilenameLogTrades
+     return ; // Erro abrindo arquivo Data//FilenameLogTrades()
    FileSeek(file_handle, 0, SEEK_END);
    if (FileIsEnding(file_handle))
      {

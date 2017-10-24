@@ -66,6 +66,14 @@ plt.ylabel('balance')
 plt.xlabel('time')
 plt.show()
 
+def calculate_delta(ar):
+  ret = [ar[0]]
+  last = ar[0]
+  for T in ar[1:]:
+    ret.append(T - last)
+    last = T
+  return ret
+
 def calculate_data(ar):
   if len(ar) == 0:
     return (0, 0, 0)
@@ -94,8 +102,61 @@ def number_of_repetitions(ar):
   minimal = min(H.iteritems(), key=itemgetter(1))
   return (minimal[1], minimal[0]+1, maximal[1], maximal[0]+1)
 
+def print_time(T_in_seconds):
+  years = int(T_in_seconds / 31536000.0)
+  remain = (T_in_seconds % 31536000.0)
+  months = int(remain / 2592000)
+  remain = (remain % 2592000)
+  weeks = int(remain / 604800)
+  remain = (remain % 604800)
+  days = int(remain / 86400)
+  remain = (remain % 86400)
+  hours = int(remain / 3600)
+  remain = (remain % 3600.0)
+  minutes = int(remain / 60)
+  remain = (remain % 60.0)
+  seconds = int(remain)
+  if years >= 1:
+    return '{}y:{}m:{}w:{}d:{}h:{}m:{}'.format(years, months, weeks, days, hours, minutes, seconds)
+  elif months >= 1:
+    return '{}m:{}w:{}d:{}h:{}m:{}'.format(months, weeks, days, hours, minutes, seconds)
+  elif weeks >= 1:
+    return '{}w:{}d:{}h:{}m:{}'.format(weeks, days, hours, minutes, seconds)
+  elif days >= 1:
+    return '{}d:{}h:{}m:{}'.format(days, hours, minutes, seconds)
+  elif hours >= 1:
+    return '{}h:{}m:{}'.format(hours, minutes, seconds)
+  return '{}m:{}'.format(minutes, seconds)
+
+def calculate_time(ar, tp):
+    #     min, hour, day, week,    month,  year
+    tps = [60, 3600, 86400, 604800, 2592000, 31536000]
+    tms = set()
+    total = 0
+    for a in ar:
+      key = int(a / tps[tp])
+      tms.add(key)
+      total += 1
+    return (total / float(len(tms)))
+
+def spaces(T, tp):
+  start = len('%2.2f' % calculate_time(T, tp))
+  return ' ' * (12 - start)
 
 # Show other data
+print 'Interval to have a signal'
+delta = calculate_delta(time[1:])
+mi, ma, av = calculate_data(delta)
+print 'Minimal: {}'.format(print_time(mi))
+print 'Maximal: {}'.format(print_time(ma))
+print 'Average: {}'.format(print_time(av))
+print 'Average signals in'
+print 'a year: %2.2f%sa month: %2.2f%sa week: %2.2f' % (calculate_time(time, 5), spaces(time, 5), calculate_time(time, 4), spaces(time, 4)[:-1], calculate_time(time, 3))
+print ' a day: %2.2f%sa hour: %2.2f%sa minute: %2.2f' % (calculate_time(time, 2), spaces(time, 2), calculate_time(time, 1), spaces(time, 1), calculate_time(time, 0))
+#print delta
+del time
+del delta
+print '-'*71
 print 'Consecutive wins ({})'.format(len(consecutive_wins))
 (mi, ma, a) = calculate_data(consecutive_wins)
 print 'Minimal: %-10d Maximal: %-10d Average: %-10.3f' % (mi, ma, a)

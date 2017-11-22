@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from time import ctime, localtime
 from sys import argv
+from os import getenv
 
 if len(argv) != 2 or len(argv[1]) < 4:
   print 'Usage: python {} csv'.format(argv[0])
@@ -72,6 +73,10 @@ plt.plot(years(time), balance, '.', color='black')
 plt.ylabel('balance')
 plt.xlabel('time')
 plt.show()
+
+show_only_balance = getenv('ONLY_BALANCE')
+if show_only_balance and show_only_balance != 0:
+  exit(0)
 
 def calculate_delta(ar):
   ret = [ar[0]]

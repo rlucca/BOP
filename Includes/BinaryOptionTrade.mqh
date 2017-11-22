@@ -188,3 +188,11 @@ void WriteData(string mode)
      }
    FileClose(file_handle);
   }
+
+//+------------------------------------------------------------------+
+//| Funcao chamada para avaliacao do optimizador Custom              |
+//+------------------------------------------------------------------+
+double OnTester()
+  {
+    return BALANCE;
+  }

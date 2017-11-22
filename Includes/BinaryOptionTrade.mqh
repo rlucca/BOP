@@ -58,7 +58,7 @@ double TRADE_PRICE()
 
 //+------------------------------------------------------------------+
 //| Retorna uma string para se usada como nome do objeto linha       |
-//+------------------------------------------------------------------+  
+//+------------------------------------------------------------------+
 string get_object_name()
   {
    return "ACTUAL_ORDER";
@@ -66,7 +66,7 @@ string get_object_name()
 
 //+------------------------------------------------------------------+
 //| Desenha uma linha para a trade atual                             |
-//+------------------------------------------------------------------+  
+//+------------------------------------------------------------------+
 void draw_a_line_from_trade()
   {
    int CHART_ID=0;
@@ -84,14 +84,14 @@ void draw_a_line_from_trade()
       ObjectSetString(CHART_ID, OBJ_NAME, OBJPROP_TOOLTIP, aux);
      }
   }
-  
+
 //+------------------------------------------------------------------+
 //| Encerra a trade, loga o resulta em um arquivo e remove a linha   |
 //+------------------------------------------------------------------+
 void CLOSE_TRADE()
   {
    int timeout = ExpireBarTimeout;
-   
+
    if (USER_ORDER[0] == 0 || USER_ORDER[1] == 0)
       return ; // Nao temos uma trade
 
@@ -133,7 +133,7 @@ void CLOSE_TRADE()
 
 //+------------------------------------------------------------------+
 //| Remove a linha desenhada de trade                                |
-//+------------------------------------------------------------------+  
+//+------------------------------------------------------------------+
 void delete_trade_line()
   {
    int CHART_ID = 0;
@@ -141,7 +141,7 @@ void delete_trade_line()
    if (ObjectFind(CHART_ID, OBJ_NAME) >= 0)
      ObjectDelete(CHART_ID,OBJ_NAME);
   }
-  
+
 //+------------------------------------------------------------------+
 //| Chama a funcao de log quando houve um empate                     |
 //+------------------------------------------------------------------+
@@ -149,7 +149,7 @@ void log_a_tie()
   {
    WriteData("TIE");
   }
-  
+
 //+------------------------------------------------------------------+
 //| Chama a funcao de log quando houve uma vitoria                   |
 //+------------------------------------------------------------------+
@@ -157,7 +157,7 @@ void log_a_win()
   {
    WriteData("WIN");
   }
-  
+
 //+------------------------------------------------------------------+
 //| Chama a funcao de log quando houve uma perda                     |
 //+------------------------------------------------------------------+
@@ -165,7 +165,7 @@ void log_a_loss()
   {
    WriteData("LOSS");
   }
-  
+
 //+------------------------------------------------------------------+
 //| Abre e insere no final do arquivo os dados novos                 |
 //+------------------------------------------------------------------+

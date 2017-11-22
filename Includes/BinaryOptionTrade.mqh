@@ -30,12 +30,14 @@ bool OPEN_TRADE(int OP)
    if (USER_ORDER[0] != 0 || USER_ORDER[1] != 0)
       return false; // Ja temos uma ordem em andamento
 
+#ifndef IGNORE_BALANCE
    if (BROKER_BALANCE < BROKER_LOT)
    {
       int diff = 0;
       diff = 1 / diff; // Para o advisor com uma excessao
       return false; // Balanco eh insuficiente
    }
+#endif
 
    if(OP==OP_BUY || OP==OP_SELL)
      {

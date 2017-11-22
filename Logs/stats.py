@@ -166,6 +166,7 @@ print 'Average signals in'
 print 'a year: %2.2f%sa month: %2.2f%sa week: %2.2f' % (calculate_time(time, 5), spaces(time, 5), calculate_time(time, 4), spaces(time, 4)[:-1], calculate_time(time, 3))
 print ' a day: %2.2f%sa hour: %2.2f%sa minute: %2.2f' % (calculate_time(time, 2), spaces(time, 2), calculate_time(time, 1), spaces(time, 1), calculate_time(time, 0))
 #print delta
+last_year = localtime(time[-1]).tm_year
 del time
 del delta
 print '-'*71
@@ -195,5 +196,5 @@ ppm = (len(wins) * 1 + len(losses) * -1.5 + len(ties) * -0.5) / 3.0
 print '                      PPM: %-10.2f' % (ppm)
 print '-'*71
 (mi, ma, a) = calculate_data(balance)
-print 'Initial balance: {} -> {}'.format(balance[0], balance[-1])
+print 'Initial balance: {} -> {} ({})'.format(balance[0], balance[-1], last_year)
 print 'Minimal: %-10.2f Maximal: %-10.2f Average: %-10.2f' % (mi, ma, a)

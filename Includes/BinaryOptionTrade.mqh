@@ -20,6 +20,7 @@ double BROKER_BALANCE = BALANCE;
 double BROKER_LOT = AMOUNT;
 double BROKER_PAYOUT = PAYOUT;
 double USER_ORDER[] = { 0, 0, -1 };
+int CUMULATIVE_LOSSES = 0;
 
 //+------------------------------------------------------------------+
 //| abre uma ordem ou troca (OP_BUY p/ compra ou OP_SELL p/ venda)   |
@@ -156,6 +157,7 @@ void log_a_tie()
 void log_a_win()
   {
    WriteData("WIN");
+   CUMULATIVE_LOSSES = 0;
   }
 
 //+------------------------------------------------------------------+
@@ -164,6 +166,7 @@ void log_a_win()
 void log_a_loss()
   {
    WriteData("LOSS");
+   CUMULATIVE_LOSSES++;
   }
 
 //+------------------------------------------------------------------+

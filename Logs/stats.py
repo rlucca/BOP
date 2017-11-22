@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from time import ctime
+from time import ctime, localtime
 from sys import argv
 
 if len(argv) != 2 or len(argv[1]) < 4:
@@ -57,11 +57,18 @@ if strike_tmp > 0 and len(result) > 0:
     consecutive_ties.append(strike_tmp)
   strike_tmp = 0
 
+def years(time):
+  ret = []
+  for t in time:
+    Y = localtime(t).tm_year
+    ret.append(Y)
+  return ret
+
 # Lets put the initial value!
-time = [time[0] - 20] + time
+time = [time[0]] + time
 balance = [10000] + balance
 # Lets plot Time x Balance!
-plt.plot(time, balance, '-', color='black')
+plt.plot(years(time), balance, '.', color='black')
 plt.ylabel('balance')
 plt.xlabel('time')
 plt.show()

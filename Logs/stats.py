@@ -72,7 +72,9 @@ balance = [10000] + balance
 plt.plot(years(time), balance, '.', color='black')
 plt.ylabel('balance')
 plt.xlabel('time')
-plt.show()
+
+if getenv('NO_BALANCE', 0) == 0:
+  plt.show()
 
 show_only_balance = getenv('ONLY_BALANCE')
 if show_only_balance and show_only_balance != 0:
